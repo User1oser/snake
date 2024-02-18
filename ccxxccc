@@ -1,0 +1,38 @@
+def start(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Привет! Я змейка!")
+def help(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Я змейка. Управляй мной с помощью команд /up, /down, /left, /right!")
+
+def up(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вверх!")
+
+def down(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вниз!")
+
+def left(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется влево!")
+
+def right(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вправо!")
+
+def echo(update, context):
+context.bot.send_message(chat_id=update.effective_chat.id, text="Я не понимаю команды. Помощь доступна по команде /help")
+
+def main():
+    updater = Updater(token='6935849637:AAF3nuNILbvDbVLitHS-ZeGNyBGAtlqjZtQ', use_context=True)
+    dispatcher = updater.dispatcher
+
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("help", help))
+    dispatcher.add_handler(CommandHandler("up", up))
+    dispatcher.add_handler(CommandHandler("down", down))
+    dispatcher.add_handler(CommandHandler("left", left))
+    dispatcher.add_handler(CommandHandler("right", right))
+    dispatcher.add_handler(MessageHandler(Filters.text, echo))
+
+    updater.start_polling()
+
+    updater.idle()
+
+if name == 'main':
+    main()
