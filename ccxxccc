@@ -1,24 +1,24 @@
-def start(update, context):
+start(update, context):
 context.bot.send_message(chat_id=update.effective_chat.id, text="Привет! Я змейка!")
-def help(update, context):
+help:
 context.bot.send_message(chat_id=update.effective_chat.id, text="Я змейка. Управляй мной с помощью команд /up, /down, /left, /right!")
 
-def up(update, context):
+up:
 context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вверх!")
 
-def down(update, context):
+down(update, context):
 context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вниз!")
 
-def left(update, context):
+left(update, context):
 context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется влево!")
 
-def right(update, context):
+right(update, context):
 context.bot.send_message(chat_id=update.effective_chat.id, text="Змейка движется вправо!")
 
-def echo(update, context):
+echo(update, context):
 context.bot.send_message(chat_id=update.effective_chat.id, text="Я не понимаю команды. Помощь доступна по команде /help")
 
-def main():
+main():
     updater = Updater(token='6935849637:AAF3nuNILbvDbVLitHS-ZeGNyBGAtlqjZtQ', use_context=True)
     dispatcher = updater.dispatcher
 
