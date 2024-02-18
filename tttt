@@ -1,0 +1,59 @@
+
+# наша игра будет использовать библиотеку python-telegram-bot для создания чат-бота в telegram
+# также мы будем использовать модуль random для генерации случайных чисел
+
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import random
+
+# определяем функцию-обработчик команды /start
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="привет! я змейка!")
+
+# определяем функцию-обработчик команды /help
+def help(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="я змейка. управляй мной с помощью команд /up, /down, /left, /right!")
+
+# определяем функцию-обработчик команды /up
+def up(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="змейка движется вверх!")
+
+# определяем функцию-обработчик команды /down
+def down(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="змейка движется вниз!")
+
+# определяем функцию-обработчик команды /left
+def left(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="змейка движется влево!")
+
+# определяем функцию-обработчик команды /right
+def right(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="змейка движется вправо!")
+
+# определяем функцию-обработчик текстового сообщения
+def echo(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="я не понимаю команды. помощь доступна по команде /help")
+
+def main():
+    # создаем экземпляр класса updater, который будет получать обновления от telegram
+    updater = Updater(token=token, use_context=True)
+
+    # получаем диспетчер для обработки обновлений
+    dispatcher = updater.dispatcher
+
+    # регистрируем обработчики команд /start, /help, /up, /down, /left, /right и текстовых сообщений
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("help", help))
+    dispatcher.add_handler(CommandHandler("up", up))
+    dispatcher.add_handler(CommandHandler("down", down))
+    dispatcher.add_handler(CommandHandler("left", left))
+    dispatcher.add_handler(CommandHandler("right", right))
+    dispatcher.add_handler(MessageHandler(Filters.text, echo))
+
+    # запускаем бота
+    updater.start_polling()
+
+    # выполняем бесконечную обработку сообщений
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
